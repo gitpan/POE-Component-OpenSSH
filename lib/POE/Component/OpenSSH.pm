@@ -3,14 +3,16 @@ package POE::Component::OpenSSH;
 use strict;
 use warnings;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 use Moose;
 use Net::OpenSSH;
+use MooseX::Aliases;
 use POE::Component::Generic;
 
 has 'args'    => ( is => 'ro', isa => 'ArrayRef', default => sub { [] } );
 has 'options' => ( is => 'ro', isa => 'HashRef',  default => sub { {} } );
+has 'error'   => ( is => 'ro', isa => 'HashRef',  default => sub { {} } );
 has 'alias'   => ( is => 'ro', isa => 'Str',      default => q{}        );
 has 'debug'   => ( is => 'ro', isa => 'Bool',     default => 0          );
 has 'verbose' => ( is => 'ro', isa => 'Bool',     default => 0          );
@@ -18,6 +20,7 @@ has 'verbose' => ( is => 'ro', isa => 'Bool',     default => 0          );
 has 'obj' => (
     is         => 'rw',
     isa        => 'POE::Component::Generic',
+    alias      => 'object',
     lazy_build => 1,
 );
 
@@ -31,6 +34,7 @@ sub _build_obj {
         object_options => $self->args,
         debug          => $self->debug,
         verbose        => $self->verbose,
+        error          => $self->error,
     );
 
     return $obj;
@@ -46,7 +50,7 @@ POE::Component::OpenSSH - Nonblocking SSH Component for POE using Net::OpenSSH
 
 =head1 VERSION
 
-Version 0.03
+Version 0.04
 
 =head1 SYNOPSIS
 
@@ -97,6 +101,9 @@ Here is an example using L<MooseX::POE>:
         # remember, $ssh is just POE::Component::OpenSSH
         # you want the Net::OpenSSH object (or psuedo-object)
         $ssh->obj->capture( { event => 'parse_cmd' }, $cmd );
+
+        # this is the same:
+        $ssh->object->capture( { event => 'parse_cmd' }, $cmd );
     }
 
     event 'parse_cmd' => sub {
@@ -146,6 +153,10 @@ This method access the actual Net::OpenSSH object. It is wrapped with L<POE::Com
 For example:
 
     $ssh->obj->capture( { event => 'handle_capture' }, 'echo yo yo' );
+
+=head2 object
+
+An alias for I<obj>.
 
 =head2 args
 
