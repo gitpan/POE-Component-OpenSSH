@@ -3,7 +3,7 @@ NAME
     Net::OpenSSH
 
 VERSION
-    Version 0.08
+    version 0.10
 
 SYNOPSIS
     Need nonblocking SSH? You like Net::OpenSSH? Try out this stuff right
@@ -43,10 +43,8 @@ DESCRIPTION
     You might ask 'why put the args in an "args" attribute instead of
     straight away attributes?' Because Net::OpenSSH has a lot of options and
     they may collide with POE::Component::Generic's options and I don't feel
-    like maintaining the mess.
-
-    It's on Github so you can patch it up if you want (I accept patches...
-    and foodstamps).
+    like maintaining the mess. It's on Github so you can patch it up if you
+    want (I accept patches... and foodstamps).
 
     Here is a more elaborate example using MooseX::POE:
 
@@ -126,7 +124,7 @@ METHODS
         Some stuff about what is happening to Net::OpenSSH. Very useful for
         debugging the Net::OpenSSH object.
 
-  obj
+  object
     This method access the actual Net::OpenSSH object. It is wrapped with
     POE::Component::Generic, so the first argument is actually a hashref
     that POE::Component::Generic requires. Specifically, noting which event
@@ -195,13 +193,7 @@ BUGS
     attribute before running the second "capture", so now it works, but I've
     yet to understand why that happens.
 
-    Please report any bugs or feature requests to "bug-poe-component-openssh
-    at rt.cpan.org", or through the web interface at
-    <http://rt.cpan.org/NoAuth/ReportBug.html?Queue=POE-Component-OpenSSH>.
-    I will be notified, and then you'll automatically be notified of
-    progress on your bug as I make changes.
-
-    Also available is the Github's issue tracker at
+    The Github's issue tracker is available at
     <http://github.com/xsawyerx/poe-component-openssh/issues>.
 
 SUPPORT
@@ -211,10 +203,6 @@ SUPPORT
 
     You can also look for information at:
 
-    *   RT: CPAN's request tracker
-
-        <http://rt.cpan.org/NoAuth/Bugs.html?Dist=POE-Component-OpenSSH>
-
     *   Github issue tracker
 
         <http://github.com/xsawyerx/poe-component-openssh/issues>
@@ -222,18 +210,6 @@ SUPPORT
     *   Github page
 
         <http://github.com/xsawyerx/poe-component-openssh/tree/master>
-
-    *   AnnoCPAN: Annotated CPAN documentation
-
-        <http://annocpan.org/dist/POE-Component-OpenSSH>
-
-    *   CPAN Ratings
-
-        <http://cpanratings.perl.org/d/POE-Component-OpenSSH>
-
-    *   Search CPAN
-
-        <http://search.cpan.org/dist/POE-Component-OpenSSH/>
 
 SEE ALSO
     If you have no idea what I'm doing (but you generally know what POE is),
@@ -252,18 +228,16 @@ DEPENDENCIES
 
     POE::Component::Generic
 
-    Moose
-
 ACKNOWLEDGEMENTS
     All the people involved in the aforementioned projects and the Perl
     community.
 
-COPYRIGHT & LICENSE
-    Copyright 2009 Sawyer X, all rights reserved.
+AUTHOR
+    Sawyer X <xsawyerx@cpan.org>
 
-    This program is free software; you can redistribute it and/or modify it
-    under the terms of either: the GNU General Public License as published
-    by the Free Software Foundation; or the Artistic License.
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2011 by Sawyer X.
 
-    See http://dev.perl.org/licenses/ for more information.
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
 

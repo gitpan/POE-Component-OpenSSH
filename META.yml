@@ -1,30 +1,33 @@
---- #YAML:1.0
-name:               POE-Component-OpenSSH
-version:            0.09
-abstract:           ~
-author:  []
-license:            unknown
-distribution_type:  module
-configure_requires:
-    ExtUtils::MakeMaker:  0
+---
+abstract: 'Nonblocking SSH Component for POE using Net::OpenSSH'
+author:
+  - 'Sawyer X <xsawyerx@cpan.org>'
 build_requires:
-    ExtUtils::MakeMaker:  0
-requires:
-    Module::Build:        0.2808
-    Moose:                0.86
-    MooseX::POE:          0
-    Net::OpenSSH:         0.36
-    POE:                  1.006
-    POE::Component::Generic:  0.1201
-    POE::Test::Helpers:   1.07
-    Term::ReadKey:        0
-    Term::ReadPassword:   0
-    Test::More:           0
-no_index:
-    directory:
-        - t
-        - inc
-generated_by:       ExtUtils::MakeMaker version 6.55_02
+  English: 0
+  File::Find: 0
+  File::Temp: 0
+  Module::Build: 0.3601
+  POE::Kernel: 0
+  POE::Test::Helpers::MooseRole: 0
+  Term::ReadKey: 0
+  Term::ReadPassword: 0
+  Test::More: 0
+configure_requires:
+  ExtUtils::MakeMaker: 6.30
+  Module::Build: 0.3601
+dynamic_config: 0
+generated_by: 'Dist::Zilla version 4.300003, CPAN::Meta::Converter version 2.112150'
+license: perl
 meta-spec:
-    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
-    version:  1.4
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: POE-Component-OpenSSH
+requires:
+  Carp: 0
+  Net::OpenSSH: 0
+  POE::Component::Generic: 0
+  strict: 0
+  warnings: 0
+resources:
+  repository: git://github.com/xsawyerx/poe-component-openssh.git
+version: 0.10
