@@ -1,12 +1,12 @@
 NAME
-    POE::Component::OpenSSH - Nonblocking SSH Component for POE using
+    POE::Component::OpenSSH - Non-blocking SSH Component for POE using
     Net::OpenSSH
 
 VERSION
-    version 0.10
+    version 0.11
 
 SYNOPSIS
-    Need nonblocking SSH? You like Net::OpenSSH? Try out this stuff right
+    Need non-blocking SSH? You like Net::OpenSSH? Try out this stuff right
     here.
 
         use POE::Component::OpenSSH;
@@ -30,14 +30,14 @@ SYNOPSIS
         );
 
 DESCRIPTION
-    This module allows you to use SSH (via Net::OpenSSH) in a nonblocking
+    This module allows you to use SSH (via Net::OpenSSH) in a non-blocking
     manner.
 
     The only differences is that in the *new()* method, you need to indicate
     OpenSSH args in *args*, and the first arg to a method should be a
     hashref that includes an *event* to reach with the result.
 
-    I kept having to write this small thing each time I needed nonblocking
+    I kept having to write this small thing each time I needed non-blocking
     SSH in a project. I got tired of it so I wrote this instead.
 
     You might ask 'why put the args in an "args" attribute instead of

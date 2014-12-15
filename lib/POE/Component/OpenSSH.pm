@@ -1,29 +1,21 @@
+package POE::Component::OpenSSH;
+# ABSTRACT: Non-blocking SSH Component for POE using Net::OpenSSH
+$POE::Component::OpenSSH::VERSION = '0.11';
 use strict;
 use warnings;
-package POE::Component::OpenSSH;
-{
-  $POE::Component::OpenSSH::VERSION = '0.10';
-}
-# ABSTRACT: Nonblocking SSH Component for POE using Net::OpenSSH
-
 use Carp 'croak';
 use Net::OpenSSH;
 use POE::Component::Generic;
 
 sub _build_object {
-    my $self   = shift;
-    my $object = POE::Component::Generic->spawn(
-        alias          => $self->{'alias'},
+    my ( $class, $opts ) = @_;
+
+    return POE::Component::Generic->spawn(
         package        => 'Net::OpenSSH',
-        object_options => $self->{'args'},
-        debug          => $self->{'debug'},
-        verbose        => $self->{'verbose'},
-        error          => $self->{'error'},
+        object_options => $opts->{'args'},
+
+        map +( $_ => $opts->{$_} ), qw<alias debug verbose error>,
     );
-
-    $self->{'_object'} = $object;
-
-    return 0;
 }
 
 sub object   { shift->{'_object'} }
@@ -41,7 +33,7 @@ sub new {
         croak 'Arguments must be in the form of key/value';
     }
 
-    my %opts  = (
+    my %opts = (
         args    => [],
         options => {},
         error   => {},
@@ -51,34 +43,37 @@ sub new {
         @_,
     );
 
-    ref $opts{'args'}    eq 'ARRAY'or croak '"args" must be an arryref';
-    ref $opts{'options'} eq 'HASH' or croak '"options" must be a hashref';
-    ref $opts{'error'}   eq 'HASH' or croak '"error" must be a hashref';
+    ref $opts{'args'}    eq 'ARRAY'
+        or croak '"args" must be an arryref';
 
-    my $self = bless { %opts }, $class;
+    ref $opts{'options'} eq 'HASH'
+        or croak '"options" must be a hashref';
 
-    $self->_build_object;
+    ref $opts{'error'}   eq 'HASH'
+        or croak '"error" must be a hashref';
 
-    return $self;
+    return bless { _object => $class->_build_object(\%opts) }, $class;
 }
 
 1;
 
-
+__END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
-POE::Component::OpenSSH - Nonblocking SSH Component for POE using Net::OpenSSH
+POE::Component::OpenSSH - Non-blocking SSH Component for POE using Net::OpenSSH
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 SYNOPSIS
 
-Need nonblocking SSH? You like Net::OpenSSH? Try out this stuff right here.
+Need non-blocking SSH? You like Net::OpenSSH? Try out this stuff right here.
 
     use POE::Component::OpenSSH;
 
@@ -101,13 +96,13 @@ What about setting timeout for Net::OpenSSH?
 
 =head1 DESCRIPTION
 
-This module allows you to use SSH (via L<Net::OpenSSH>) in a nonblocking manner.
+This module allows you to use SSH (via L<Net::OpenSSH>) in a non-blocking manner.
 
 The only differences is that in the I<new()> method, you need to indicate
 OpenSSH args in I<args>, and the first arg to a method should be a hashref that
 includes an I<event> to reach with the result.
 
-I kept having to write this small thing each time I needed nonblocking SSH in a
+I kept having to write this small thing each time I needed non-blocking SSH in a
 project. I got tired of it so I wrote this instead.
 
 You might ask 'why put the args in an "args" attribute instead of straight away
@@ -342,7 +337,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-
